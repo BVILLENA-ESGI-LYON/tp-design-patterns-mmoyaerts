@@ -1,0 +1,61 @@
+<?php
+
+interface Enemy {
+    public function display();
+    public function attack();
+}
+
+class Orc implements Enemy {
+    public function display() {
+        echo "Un Orc apparaît !\n";
+    }
+
+    public function attack() {
+        echo "L'Orc attaque avec sa hache !\n";
+    }
+}
+
+class Goblin implements Enemy {
+    public function display() {
+        echo "Un Goblin apparaît !\n";
+    }
+
+    public function attack() {
+        echo "Le Goblin attaque avec sa lance !\n";
+    }
+}
+
+interface EnemyFactory {
+    public function createWarrior(): Enemy;
+    public function createArcher(): Enemy;
+}
+
+class OrcFactory implements EnemyFactory {
+    public function createWarrior(): Enemy {
+        return new Orc();
+    }
+
+    public function createArcher(): Enemy {
+        return new Orc();
+    }
+}
+
+class GoblinFactory implements EnemyFactory {
+    public function createWarrior(): Enemy {
+        return new Goblin();
+    }
+
+    public function createArcher(): Enemy {
+        return new Goblin();
+    }
+}
+
+$orcFactory = new OrcFactory();
+$orcWarrior = $orcFactory->createWarrior();
+$orcWarrior->display();
+$orcWarrior->attack();
+
+$goblinFactory = new GoblinFactory();
+$goblinArcher = $goblinFactory->createArcher();
+$goblinArcher->display();
+$goblinArcher->attack();
